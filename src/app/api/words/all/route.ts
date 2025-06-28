@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
 
+//endpoint : http://localhost:3000/api/words/all
+
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 function shuffleArray<T>(array: T[]): T[] {
