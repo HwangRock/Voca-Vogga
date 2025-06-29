@@ -23,22 +23,17 @@ export default function HomePage() {
   };
 
   return (
-    <main style={{ padding: "2rem" }}>
-      <h1>단어 가져오기</h1>
-
-      <div style={{ marginBottom: "1rem" }}>
-        <button onClick={fetchAllWords} style={{ marginRight: "1rem" }}>
-          모든 단어 테스트
-        </button>
-        <button onClick={fetchRandomWords}>
-          랜덤 20개 단어 테스트
-        </button>
+    <main>
+      <h1>📚 Notion 단어 테스트</h1>
+      <div style={{ marginBottom: "20px" }}>
+        <button onClick={fetchAllWords}>모든 단어 가져오기</button>
+        <button onClick={fetchRandomWords}>랜덤 20개 단어 가져오기</button>
       </div>
-
       <ul>
-        {words.map((word, i) => (
+        {words.map((w, i) => (
           <li key={i}>
-            <strong>{word.english}</strong> - {word.korean}
+            <span><strong>{w.english}</strong></span>
+            <span>{w.korean}</span>
           </li>
         ))}
       </ul>
