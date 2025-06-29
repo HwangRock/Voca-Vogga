@@ -24,10 +24,12 @@ export default function HomePage() {
 
   return (
     <main>
-      <h1>📚 Notion 단어 테스트</h1>
-      <div style={{ marginBottom: "20px" }}>
-        <button onClick={fetchAllWords}>모든 단어 가져오기</button>
-        <button onClick={fetchRandomWords}>랜덤 20개 단어 가져오기</button>
+      <h1>HwangRock 영단어 테스트</h1>
+      <h3>상특) 영단어장을 직접 만든다.</h3>
+      <div className="button-container" style={{ marginBottom: "20px" }}>
+        <button onClick={fetchAllWords}>모든 단어 테스트</button>
+        <button onClick={fetchRandomWords}>랜덤 20개 단어 테스트</button>
+        <button onClick={fetchAllWords}>영단어장</button>
       </div>
       <ul>
         {words.map((w, i) => (
