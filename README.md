@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## HwangRock Voca Test
 
-## Getting Started
+notion에서 영단어를 불러오는 영단어 테스트 프로젝트입니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 개발 배경
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##### 기술
+서버리스라는 단어를 듣고 들은 생각은 "서버리스 프로젝트에 백엔드는 필요 없나?" 였습니다.  
+이런 궁금증을 해소하고 싶어서 직접 서버리스를 공부하고 해보기로 마음 먹었습니다.  
+<br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+##### 영어
+영어는 꺼내쓰는 연습을 해야 느는 분야라고 생각합니다.  
+그러기에 논문이나 공식 문서같은 곳에서 읽다가 모르는 단어를 다시 꺼내 쓰기 위해서 저만의 영단어 테스트 프로젝트를 만들어보기로 했습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 기술 도입 배경
 
-To learn more about Next.js, take a look at the following resources:
+서버리스에는 2가지 구성이 있다고 학습했습니다.  
+AWS Lambda로 API를 호출하고 CSR로 렌더링하는 방법,  
+풀스택 프레임워크를 이용해서 SSR로 렌더링하는 방법.  
+<br>
+개인적으로 지금은 서버리스를 쓰는 이유가 서버의 비용을 줄이기 위해서 라고 생각합니다.  
+그러기에 무료에 제한이 있는 AWS Lambda보다는 풀스택 프레임워크인 Next.js에 notion API를 연결해서 데이터를 렌더링하는 방법을 선택했습니다.  
+<br>
+비용면에서는 제 판단이 정답이지만, 만약 AWS Lambda로 API를 호출했다면 API Gateway나 CloudFront와 연계해서 API 최적화를 더 시켜보는 경험을 가질 수 있었을거 같았습니다.  
+(다음에 실험해볼 생각입니다.) 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 아키텍처
 
-## Deploy on Vercel
+나중에 작성
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 회고
+
+나중에 작성
+
