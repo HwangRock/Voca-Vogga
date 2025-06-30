@@ -23,7 +23,7 @@ export default function HomePage() {
   };
 
   return (
-    <main>
+    <main className="fade-in">
       <h1>HwangRock 영단어 테스트</h1>
       <h3>상특) 영단어장을 직접 만든다.</h3>
       <div className="button-container" style={{ marginBottom: "20px" }}>
@@ -33,7 +33,7 @@ export default function HomePage() {
       </div>
       <ul>
         {words.map((w, i) => (
-          <li key={i}>
+          <li key={i} className="fade-in">
             <span><strong>{w.english}</strong></span>
             <span>{w.korean}</span>
           </li>
