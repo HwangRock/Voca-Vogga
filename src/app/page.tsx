@@ -20,12 +20,6 @@ export default function HomePage() {
     setWords(data);
   };
 
-  const fetchRandomWords = async () => {
-    const res = await fetch("/api/words/random");
-    const data = await res.json();
-    setWords(data);
-  };
-
   const startTest = async (isRandom = false) => {
     const url = isRandom ? "/api/words/random" : "/api/words/all";
     const res = await fetch(url);
