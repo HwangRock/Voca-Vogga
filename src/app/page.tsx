@@ -11,6 +11,7 @@ type WrongWord = {
   english: string;
   korean: string;
   wrongAnswer: string;
+  checked: boolean;
 };
 
 export default function HomePage() {
@@ -42,7 +43,8 @@ export default function HomePage() {
   };
 
   const nextWord = () => {
-    const correct = inputValue.trim() === words[currentIndex].korean.trim();
+    const correct =
+      inputValue.trim() === words[currentIndex].korean.trim();
 
     if (!correct) {
       setWrongWords((prev) => [
@@ -51,10 +53,11 @@ export default function HomePage() {
           english: words[currentIndex].english,
           korean: words[currentIndex].korean,
           wrongAnswer: inputValue || "미입력",
+          checked: false,
         },
       ]);
     } else {
-      setScore(score + 1);
+      setScore((prev) => prev + 1);
     }
 
     if (currentIndex + 1 < words.length) {
@@ -66,13 +69,35 @@ export default function HomePage() {
     }
   };
 
-  const restartWithWrongWords = () => {
-    if (wrongWords.length === 0) return;
+  const toggleCheck = (index: number) => {
+  const checkedNow = wrongWords[index].checked;
+  const newChecked = !checkedNow;
 
-    const wordsToRetry = wrongWords.map((w) => ({
-      english: w.english,
-      korean: w.korean,
-    }));
+  setScore((prev) =>
+    newChecked ? prev + 1 : Math.max(0, prev - 1)
+  );
+
+  setWrongWords((prev) =>
+    prev.map((w, i) =>
+      i === index ? { ...w, checked: newChecked } : w
+    )
+  );
+};
+
+
+
+  const restartWithWrongWords = () => {
+    const wordsToRetry = wrongWords
+      .filter((w) => !w.checked)
+      .map((w) => ({
+        english: w.english,
+        korean: w.korean,
+      }));
+
+    if (wordsToRetry.length === 0) {
+      alert("재시험할 단어가 없습니다.");
+      return;
+    }
 
     setWords(wordsToRetry);
     setWrongWords([]);
@@ -131,13 +156,36 @@ export default function HomePage() {
               <h3>틀린 단어 목록</h3>
               <ul>
                 {wrongWords.map((w, i) => (
-                  <li key={i}>
-                   
-                    <strong>{w.english}</strong> 
-                     <span style={{ color: "red", marginLeft: "10px" }}>
-                      ({w.wrongAnswer})
-                    </span>
-                    {w.korean}
+                  <li key={i} className="wrong-word-row">
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                        gap: "8px",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={w.checked}
+                        onChange={() => toggleCheck(i)}
+                        className="wrong-word-checkbox"
+                      />
+                      <span className="wrong-word-english">
+                        {w.english}
+                      </span>
+                      <span className="wrong-word-wrong">
+                        {w.wrongAnswer}
+                      </span>
+                      <span className="wrong-word-correct">
+                        {w.korean}
+                      </span>
+                      {w.checked && (
+                        <span className="excluded-text">
+                          (제외됨 +1점)
+                        </span>
+                      )}
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -147,8 +195,10 @@ export default function HomePage() {
               <p>돌아가려면 F5를 누르세요.</p>
             </>
           ) : (
-            <p>모든 단어를 맞췄어요! 🎉 <br />
-              돌아가려면 F5를 누르세요.</p>
+            <p>
+              모든 단어를 맞췄어요! 🎉 <br />
+              돌아가려면 F5를 누르세요.
+            </p>
           )}
         </div>
       )}
@@ -156,11 +206,10 @@ export default function HomePage() {
       {!isTesting && !showResult && words.length > 0 && (
         <ul>
           {words.map((w, i) => (
-            <li key={i} className="fade-in">
-              <span>
-                <strong>{w.english}</strong>
-              </span>
-              <span>{w.korean}</span>
+            <li key={i} className="wrong-word-row">
+              <span className="wrong-word-english">{w.english}</span>
+              <span className="wrong-word-wrong"></span>
+              <span className="wrong-word-correct">{w.korean}</span>
             </li>
           ))}
         </ul>
