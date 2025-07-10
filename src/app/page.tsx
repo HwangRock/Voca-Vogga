@@ -57,9 +57,9 @@ export default function HomePage() {
       )}
 
       {!isTesting && !showResult && words.length > 0 && (
-        <VocabList
-          words={words}
-        />
+        <div className="fade-in">
+          <VocabList words={words} />
+        </div>
       )}
     </main>
   );

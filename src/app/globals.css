@@ -183,13 +183,6 @@ input[type="checkbox"] {
   gap: 8px;
 }
 
-.excluded-text {
-  color: green;
-  margin-left: 8px;
-  font-weight: bold;
-  font-size: 0.7rem;
-}
-
 .fade-in {
   animation: fadeIn 1s ease-out;
 }
