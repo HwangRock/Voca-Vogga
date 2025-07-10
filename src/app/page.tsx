@@ -1,18 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-type Word = {
-  english: string;
-  korean: string;
-};
-
-type WrongWord = {
-  english: string;
-  korean: string;
-  wrongAnswer: string;
-  checked: boolean;
-};
+import { Word, WrongWord } from "@/types";
 
 export default function HomePage() {
   const [words, setWords] = useState<Word[]>([]);
@@ -157,14 +146,7 @@ export default function HomePage() {
               <ul>
                 {wrongWords.map((w, i) => (
                   <li key={i} className="wrong-word-row">
-                    <label
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        width: "100%",
-                        gap: "8px",
-                      }}
-                    >
+                    <label className="wrong-word-label">
                       <input
                         type="checkbox"
                         checked={w.checked}

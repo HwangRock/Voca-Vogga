@@ -176,6 +176,13 @@ input[type="checkbox"] {
   accent-color: #3b82f6;
 }
 
+.wrong-word-label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
 .excluded-text {
   color: green;
   margin-left: 8px;
