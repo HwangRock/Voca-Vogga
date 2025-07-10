@@ -2,6 +2,7 @@
 
 import useWordTest from "@/app/hooks/useWordTest";
 import TestPanel from "@/app/components/TestPanel";
+import ResultPanel from "@/app/components/ResultPanel";
 
 export default function HomePage() {
   const {
@@ -45,56 +46,13 @@ export default function HomePage() {
       )}
 
       {showResult && (
-        <div className="test-result fade-in">
-          <h2>테스트 결과</h2>
-          <p>
-            점수: {score} / {words.length} (
-            {Math.round((score / words.length) * 100)}%)
-          </p>
-
-          {wrongWords.length > 0 ? (
-            <>
-              <h3>틀린 단어 목록</h3>
-              <ul>
-                {wrongWords.map((w, i) => (
-                  <li key={i} className="wrong-word-row">
-                    <label className="wrong-word-label">
-                      <input
-                        type="checkbox"
-                        checked={w.checked}
-                        onChange={() => toggleCheck(i)}
-                        className="wrong-word-checkbox"
-                      />
-                      <span className="wrong-word-english">
-                        {w.english}
-                      </span>
-                      <span className="wrong-word-wrong">
-                        {w.wrongAnswer}
-                      </span>
-                      <span className="wrong-word-correct">
-                        {w.korean}
-                      </span>
-                      {w.checked && (
-                        <span className="excluded-text">
-                          (제외됨 +1점)
-                        </span>
-                      )}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-              <button onClick={restartWithWrongWords}>
-                틀린 단어 재테스트
-              </button>
-              <p>돌아가려면 F5를 누르세요.</p>
-            </>
-          ) : (
-            <p>
-              모든 단어를 맞췄어요! 🎉 <br />
-              돌아가려면 F5를 누르세요.
-            </p>
-          )}
-        </div>
+        <ResultPanel
+          score={score}
+          wordsLength={words.length}
+          wrongWords={wrongWords}
+          toggleCheck={toggleCheck}
+          restartWithWrongWords={restartWithWrongWords}
+        />
       )}
 
       {!isTesting && !showResult && words.length > 0 && (
