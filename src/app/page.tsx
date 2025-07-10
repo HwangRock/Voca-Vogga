@@ -3,6 +3,7 @@
 import useWordTest from "@/app/hooks/useWordTest";
 import TestPanel from "@/app/components/TestPanel";
 import ResultPanel from "@/app/components/ResultPanel";
+import VocabList from "@/app/components/VocabList";
 
 export default function HomePage() {
   const {
@@ -56,15 +57,9 @@ export default function HomePage() {
       )}
 
       {!isTesting && !showResult && words.length > 0 && (
-        <ul>
-          {words.map((w, i) => (
-            <li key={i} className="wrong-word-row">
-              <span className="wrong-word-english">{w.english}</span>
-              <span className="wrong-word-wrong"></span>
-              <span className="wrong-word-correct">{w.korean}</span>
-            </li>
-          ))}
-        </ul>
+        <VocabList
+          words={words}
+        />
       )}
     </main>
   );
