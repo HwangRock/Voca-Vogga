@@ -26,6 +26,9 @@ export default function ResultPanel({
       {wrongWords.length > 0 ? (
         <>
           <h3>틀린 단어 목록</h3>
+          <h4 style={{ textAlign: "center" }}>
+            맞았다고 생각하는 단어는 체크를 누르세요
+            </h4>
           <ul>
             {wrongWords.map((w, i) => (
               <li key={i} className="wrong-word-row">
@@ -39,11 +42,6 @@ export default function ResultPanel({
                   <span className="wrong-word-english">{w.english}</span>
                   <span className="wrong-word-wrong">{w.wrongAnswer}</span>
                   <span className="wrong-word-correct">{w.korean}</span>
-                  {w.checked && (
-                    <span className="excluded-text">
-                      (제외됨 +1점)
-                    </span>
-                  )}
                 </label>
               </li>
             ))}
