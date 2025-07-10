@@ -1,6 +1,7 @@
 "use client";
 
 import useWordTest from "@/app/hooks/useWordTest";
+import TestPanel from "@/app/components/TestPanel";
 
 export default function HomePage() {
   const {
@@ -34,25 +35,13 @@ export default function HomePage() {
       )}
 
       {isTesting && words.length > 0 && (
-        <div className="test-container fade-in">
-          <p className="test-progress">
-            {currentIndex + 1} / {words.length}
-          </p>
-
-          <h2>{words[currentIndex].english}</h2>
-
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="뜻을 입력하세요"
-            className="test-input"
-          />
-
-          <div className="next-button-wrapper">
-            <button onClick={nextWord}>다음</button>
-          </div>
-        </div>
+        <TestPanel
+          words={words}
+          currentIndex={currentIndex}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          nextWord={nextWord}
+        />
       )}
 
       {showResult && (
