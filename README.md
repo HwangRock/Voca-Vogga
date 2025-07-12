@@ -50,8 +50,12 @@ AWS Lambda로 API를 호출하고 CSR로 렌더링하는 방법,
 ---
 
 ### 아키텍처
+목적이 수익 창출이 아니라 학습 보조이므로 성능보다는 무료에 집중해서 설계했습니다.  
+![ ](./presentation/voca_architecture.png)
 
-나중에 작성
+###### 실험 후 변경을 고려할만한 점
+- DB를 Notion에서 DynamoDB로 변경
+- 테스트 로직을 AWS Lambda로 변경
 
 ---
 
