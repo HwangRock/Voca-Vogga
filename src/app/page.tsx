@@ -26,7 +26,7 @@ export default function HomePage() {
   return (
     <main className="fade-in">
       <h1>HwangRock English Voca Test</h1>
-      <h3>"Rome wasn’t built in a day"</h3>
+      <h3>&quot;Rome wasn’t built in a day&quot;</h3>
 
       {!isTesting && !showResult && (
         <div className="button-container">
