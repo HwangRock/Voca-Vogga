@@ -25,14 +25,14 @@ export default function HomePage() {
 
   return (
     <main className="fade-in">
-      <h1>HwangRock 영단어 테스트</h1>
-      <h3>상특) 영단어장을 직접 만든다.</h3>
+      <h1>HwangRock English Voca Test</h1>
+      <h3>"Rome wasn’t built in a day"</h3>
 
       {!isTesting && !showResult && (
         <div className="button-container">
-          <button onClick={() => startTest(false)}>모든 단어 테스트</button>
-          <button onClick={() => startTest(true)}>랜덤 20개 단어 테스트</button>
-          <button onClick={fetchAllWords}>영단어장</button>
+          <button onClick={() => startTest(false)}>All Word Test</button>
+          <button onClick={() => startTest(true)}>Random 20 Word Test</button>
+          <button onClick={fetchAllWords}>Notebook</button>
         </div>
       )}
 
