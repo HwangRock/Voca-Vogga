@@ -54,8 +54,7 @@ AWS Lambda로 API를 호출하고 CSR로 렌더링하는 방법,
 ![ ](./presentation/voca_architecture.png)
 
 ###### 실험 후 변경을 고려할만한 점
-- DB를 Notion에서 DynamoDB로 변경
-- 테스트 로직을 AWS Lambda로 변경
+- 테스트 로직을 AWS Lambda로 변경 
 
 ---
 
