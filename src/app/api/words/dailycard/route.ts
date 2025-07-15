@@ -54,15 +54,18 @@ export async function GET(request: Request) {
       const row = Math.floor(i / 3);
       const x = cellWidth * col + cellWidth / 2;
       const y = rowHeights[row];
+      const delay = 0.2 * i; // 각 단어마다 약간 딜레이 주기
       return `
         <text x="${x}" y="${y}" 
-          font-size="20" fill="#ffffffff" 
+          font-size="20" fill="#ffffffff" opacity="0"
           font-family="Verdana, Sans-serif"
           text-anchor="middle" dominant-baseline="middle">
           ${w.english}
+          <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="${delay}s" fill="freeze" />
         </text>
       `;
     }).join('\n');
+
 
     const svg = `
       <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
