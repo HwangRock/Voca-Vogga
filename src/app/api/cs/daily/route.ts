@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
 
 // endpoint : http://localhost:3000/api/cs/daily?name=HwangRock
