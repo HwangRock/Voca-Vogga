@@ -45,7 +45,7 @@ export async function GET(request: Request) {
   const daily = shuffled[0] || { category: '', question: '' };
 
   const svg = `
-    <svg width="900" height="200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="700" height="200" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#04411a; stop-opacity:1" />
@@ -68,7 +68,7 @@ export async function GET(request: Request) {
           fill: #f8fafbff;
         }
         .question {
-          font-size: 25px;
+          font-size: 21px;
           fill: #f8fafbff;
           font-family="Verdana, Sans-serif";
         }
