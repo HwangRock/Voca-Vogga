@@ -6,25 +6,16 @@ import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
-function getTodaySeed(): number {
+function getTodayIndex(total: number): number {
   const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
   const dateStr = kstNow.toISOString().slice(0, 10);
   let seed = 0;
   for (const c of dateStr) {
     seed += c.charCodeAt(0);
   }
-  return seed;
+  return seed % total;
 }
 
-function shuffleWithSeed<T>(array: T[], seed: number): T[] {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    seed = (seed * 9301 + 49297) % 233280;
-    const j = Math.floor((seed / 233280) * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -39,10 +30,8 @@ export async function GET(request: Request) {
     question: page.properties.question?.rich_text?.[0]?.plain_text || '',
   }));
 
-  const seed = getTodaySeed();
-  const shuffled = shuffleWithSeed(csData, seed);
-
-  const daily = shuffled[0] || { category: '', question: '' };
+  const index = getTodayIndex(csData.length);
+  const daily = csData[index];
 
   const svg = `
     <svg width="700" height="200" xmlns="http://www.w3.org/2000/svg">
