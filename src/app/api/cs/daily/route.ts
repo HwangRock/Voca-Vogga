@@ -9,7 +9,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 function getTodayIndex(total: number): number {
   const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
   const dateStr = kstNow.toISOString().slice(0, 10);
-  let seed = 0;
+  let seed = -5;
   for (const c of dateStr) {
     seed += c.charCodeAt(0);
   }

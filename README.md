@@ -45,7 +45,11 @@ AWS Lambda로 API를 호출하고 CSR로 렌더링하는 방법,
   https://github.com/HwangRock/Experiment_Kor-fastText 여기서 Solution 진행.
 
 ###### 서비스 관점
-- 단어에 체크박스를 넣어서 재시험 단어에 넣을지 말지 사용자의 의지에 결정시킴.
+- 단어에 체크박스를 넣어서 재시험 단어에 넣을지 말지 사용자의 의지에 결정시킴.  
+
+#### How 카드에 나오는 데이터를 고정
+
+DB에 새로운 데이터를 넣으면 'mod total' 때문에 카드에 나오는 데이터가 바뀌게 됨.   
   
 ---
 
