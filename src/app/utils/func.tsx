@@ -1,7 +1,12 @@
 import React from "react";
 
+interface Word {
+  english: string;
+  korean: string;
+}
+
 export function renderWords<P extends Record<string, unknown>>(
-    words: any[],
+    words: Word[],
     Component: React.ComponentType<P>,
     props: P
 ): React.ReactNode {
