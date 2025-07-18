@@ -1,8 +1,5 @@
 "use client";
 
-import useWordTest from "@/app/hooks/useWordTest";
-import TestPanel from "@/app/components/TestPanel";
-import ResultPanel from "@/app/components/ResultPanel";
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
