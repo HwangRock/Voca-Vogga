@@ -8,7 +8,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 function getTodayIndex(total: number): number {
   const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
-  const baseDate = new Date("2024-01-01T00:00:00+09:00"); // 원하는 기준일
+  const baseDate = new Date("2024-01-01T00:00:00+09:00"); 
   const diffDays = Math.floor((kstNow.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24));
   return diffDays % total;
 }

@@ -3,7 +3,7 @@
 import useWordTest from "@/app/hooks/useWordTest";
 import TestPanel from "@/app/components/TestPanel";
 import ResultPanel from "@/app/components/ResultPanel";
-import VocabList from "@/app/components/VocabList";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const {
@@ -22,6 +22,7 @@ export default function HomePage() {
     restartWithWrongWords,
   } = useWordTest();
 
+  const router = useRouter();
 
   return (
     <main className="fade-in">
@@ -32,7 +33,7 @@ export default function HomePage() {
         <div className="button-container">
           <button onClick={() => startTest(false)}>All Word Test</button>
           <button onClick={() => startTest(true)}>Random 20 Word Test</button>
-          <button onClick={fetchAllWords}>Notebook</button>
+          <button onClick={() => router.push("/notebook")}>Notebook</button>
         </div>
       )}
 
@@ -56,11 +57,6 @@ export default function HomePage() {
         />
       )}
 
-      {!isTesting && !showResult && words.length > 0 && (
-        <div className="fade-in">
-          <VocabList words={words} />
-        </div>
-      )}
     </main>
   );
 }
