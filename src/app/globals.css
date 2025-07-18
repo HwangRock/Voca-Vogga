@@ -1,6 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
+header nav {
+  display: flex;
+  justify-content: space-around; /* 또는 space-evenly */
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 100;
+  border-radius: 10px; /* 모서리 둥글게 (선택사항) */
+}
+
+header nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+header nav a:hover {
+  background-color: #e2e8f0;
+}
+
+
 body {
   background: #97c3f0;            
   font-family: 'Noto Sans KR', sans-serif;
