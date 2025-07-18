@@ -1,4 +1,3 @@
-/* eslint-disable */
 "use client";
 
 import VocabList from "@/app/components/VocabList";

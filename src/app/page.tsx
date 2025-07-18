@@ -15,7 +15,6 @@ export default function HomePage() {
     wrongWords,
     showResult,
     setInputValue,
-    fetchAllWords,
     startTest,
     nextWord,
     toggleCheck,
