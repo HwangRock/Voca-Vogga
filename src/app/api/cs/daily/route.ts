@@ -1,50 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Client } from '@notionhq/client';
+import { chineseRemainder } from '../../../utils/func'
 
 // endpoint : http://localhost:3000/api/cs/daily?name=HwangRock
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
-function getTodayIndex(total: number): number {
-  const now = new Date();
+const FIXED_TOTAL = 9; // Notion 데이터 개수에 맞춰 고정
 
+export function getTodayIndex(): number {
+  const now = new Date();
   const kstTime = now.getTime() + 9 * 60 * 60 * 1000;
   const kstDate = new Date(kstTime);
-
-  // KST 자정 기준
-  const kstMidnight = new Date(
-    kstDate.getFullYear(),
-    kstDate.getMonth(),
-    kstDate.getDate(),
-    0, 0, 0, 0
-  );
-
+  const kstMidnight = new Date(kstDate.getFullYear(), kstDate.getMonth(), kstDate.getDate(), 0, 0, 0, 0);
   const baseDate = new Date(2024, 0, 1, 0, 0, 0, 0);
 
-  const diffTime = kstMidnight.getTime() - baseDate.getTime();
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.floor((kstMidnight.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24))+4;
 
-  return ((total - (diffDays % total) - 6 + total) % total);
+  return diffDays % FIXED_TOTAL;
 }
-
-
-
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get("name") || "";
 
   const response = await notion.databases.query({
-    database_id: process.env.NOTION_CS_DATABASE_ID!,
-  });
+  database_id: process.env.NOTION_CS_DATABASE_ID!,
+});
 
-  const csData = response.results.map((page: any) => ({
+  const csData = response.results
+  .map((page: any) => ({
     category: page.properties.category?.title?.[0]?.plain_text || '',
     question: page.properties.question?.rich_text?.[0]?.plain_text || '',
-  }));
+  }))
+  .reverse();
 
-  const index = getTodayIndex(csData.length);
+  const index = getTodayIndex();
   const daily = csData[index];
 
   const svg = `

@@ -13,10 +13,12 @@ export async function GET() {
       database_id: process.env.NOTION_CS_DATABASE_ID!,
     });
 
-    const csData = response.results.map((page: any) => ({
-      category: page.properties.category?.title[0]?.plain_text || '',
-      question: page.properties.question?.rich_text[0]?.plain_text || '',
-    }));
+    const csData = response.results
+  .map((page: any) => ({
+    category: page.properties.category?.title?.[0]?.plain_text || '',
+    question: page.properties.question?.rich_text?.[0]?.plain_text || '',
+  }))
+  .reverse();
 
 
     return NextResponse.json(csData);
