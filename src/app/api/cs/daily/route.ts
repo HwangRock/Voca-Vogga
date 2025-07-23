@@ -8,7 +8,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 const FIXED_TOTAL = 9; // Notion 데이터 개수에 맞춰 고정
 
-export function getTodayIndex(): number {
+function getTodayIndex(): number {
   const now = new Date();
   const kstTime = now.getTime() + 9 * 60 * 60 * 1000;
   const kstDate = new Date(kstTime);
