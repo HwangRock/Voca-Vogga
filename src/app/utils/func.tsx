@@ -19,6 +19,7 @@ export function renderWords<P extends Record<string, unknown>>(
     }
 }
 
+/*
 function modInverse(a: number, m: number): number {
   let m0 = m, x0 = 0, x1 = 1;
   if (m === 1) return 0;
@@ -43,4 +44,4 @@ export function chineseRemainder(a1: number, m1: number, a2: number, m2: number)
 
   const x = (a1 * M1 * y1 + a2 * M2 * y2) % M;
   return (x + M) % M;
-}
+}*/
