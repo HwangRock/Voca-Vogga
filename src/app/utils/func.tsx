@@ -32,6 +32,7 @@ function modInverse(a: number, m: number): number {
   return x1 < 0 ? x1 + m0 : x1;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function chineseRemainder(a1: number, m1: number, a2: number, m2: number): number {
   const M = m1 * m2;
   const M1 = M / m1;
