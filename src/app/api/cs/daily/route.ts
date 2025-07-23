@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Client } from '@notionhq/client';
-import { chineseRemainder } from '../../../utils/func'
 
 // endpoint : http://localhost:3000/api/cs/daily?name=HwangRock
 
