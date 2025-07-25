@@ -6,7 +6,7 @@ import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
-const FIXED_TOTAL = 9; // Notion 데이터 개수에 맞춰 고정
+const FIXED_TOTAL = 14; // Notion 데이터 개수에 맞춰 고정
 
 function getTodayIndex(): number {
   const now = new Date();
@@ -15,7 +15,7 @@ function getTodayIndex(): number {
   const kstMidnight = new Date(kstDate.getFullYear(), kstDate.getMonth(), kstDate.getDate(), 0, 0, 0, 0);
   const baseDate = new Date(2024, 0, 1, 0, 0, 0, 0);
 
-  const diffDays = Math.floor((kstMidnight.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24))+5;
+  const diffDays = Math.floor((kstMidnight.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24))+11;
 
   return diffDays % FIXED_TOTAL;
 }
