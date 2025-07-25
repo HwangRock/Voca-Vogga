@@ -58,11 +58,11 @@ export async function GET(request: Request) {
           font-family: "Trebuchet MS", sans-serif;
         }
         .category {
-          font-size: 18px;
+          font-size: 16px;
           fill: #f8fafbff;
         }
         .question {
-          font-size: 21px;
+          font-size: 18px;
           fill: #f8fafbff;
           font-family="Verdana, Sans-serif";
         }
