@@ -21,7 +21,7 @@ export async function GET(request: Request) {
         <a href="${post.link}" target="_blank">
           <text x="50%" y="${30 + i * 15}%" text-anchor="middle" class="comment">
             ${post.title}
-          </text>
+          </text> 
         </a>
       `
       )
