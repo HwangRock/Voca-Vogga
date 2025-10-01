@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
    const itemsSvg = slicedPosts
       .map(
-        (post: any, i: number) => `
+        (post: { title?: string; link?: string }, i: number) => `
         <a href="${post.link}" target="_blank">
           <text x="50%" y="${30 + i * 15}%" text-anchor="middle" class="comment">
             ${post.title}
@@ -61,7 +61,11 @@ export async function GET(request: Request) {
         "Content-Type": "image/svg+xml",
       },
     });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
