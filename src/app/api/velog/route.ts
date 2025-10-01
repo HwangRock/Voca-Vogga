@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { parseStringPromise } from "xml2js";
 
 // http://localhost:3000/api/velog?id=hwangrock1220
