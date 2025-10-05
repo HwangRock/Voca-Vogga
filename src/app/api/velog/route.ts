@@ -12,16 +12,17 @@ export async function GET(request: Request) {
 
     const data = await parseStringPromise(xml, { explicitArray: false });
 
-    const posts = data.rss.channel.item;
+    const rawPosts = data.rss.channel.item;
+    const posts = Array.isArray(rawPosts) ? rawPosts : [rawPosts]; // 슬프게도 1개일때는 배열로 오지않고 object로만 온다
+
     const slicedPosts=posts.slice(0,5);
-
-    const svg=velogSvg(id,slicedPosts);
-
-    return new Response(svg, {
+      const svg=velogSvg(id,slicedPosts);
+      return new Response(svg, {
       headers: {
         "Content-Type": "image/svg+xml",
       },
     });
+    
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     return new Response(JSON.stringify({ error: message }), {
