@@ -1,4 +1,4 @@
-export function velogSvg(id: String, posts: { title: string; link: string, pubDate: string }[]){
+export function velogSvg(id: string, posts: { title: string; link: string, pubDate: string }[]){
     const itemsSvg = posts
     .map((post, i) => {
       const formattedDate = formatPubDate(post.pubDate); 
