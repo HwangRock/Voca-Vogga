@@ -1,4 +1,5 @@
 import { parseStringPromise } from "xml2js";
+import { velogSvg } from "./velogSvg";
 
 // http://localhost:3000/api/velog?id=hwangrock1220
 
@@ -14,46 +15,7 @@ export async function GET(request: Request) {
     const posts = data.rss.channel.item;
     const slicedPosts=posts.slice(0,5);
 
-   const itemsSvg = slicedPosts
-      .map(
-        (post: { title?: string; link?: string }, i: number) => `
-        <a href="${post.link}" target="_blank">
-          <text x="50%" y="${30 + i * 15}%" text-anchor="middle" class="comment">
-            ${post.title}
-          </text> 
-        </a>
-      `
-      )
-      .join("");
-
-    const svg = `
-      <svg width="700" height="300" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#21985cff; stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#5feba5ff; stop-opacity:1" />
-          </linearGradient>
-        </defs>
-        <style>
-          .title {
-            font-size: 24px;
-            fill: #0b0b0bff;
-            font-family: "Trebuchet MS", sans-serif;
-          }
-          .comment {
-            font-size: 15px;
-            fill: #ffffff;
-            font-family: "Trebuchet MS", sans-serif;
-            cursor: pointer;
-          }
-        </style>
-        <rect width="100%" height="100%" fill="url(#grad-green)" rx="20" ry="20"/>
-        <text x="50%" y="15%" text-anchor="middle" class="title">
-          ${id}'s velog post
-        </text>
-        ${itemsSvg}
-      </svg>
-    `;
+    const svg=velogSvg(id,slicedPosts);
 
     return new Response(svg, {
       headers: {
