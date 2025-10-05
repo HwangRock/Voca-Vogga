@@ -3,7 +3,7 @@ export function velogSvg(id: String, posts: { title: string; link: string }[]){
       .map(
         (post: { title?: string; link?: string }, i: number) => `
         <a href="${post.link}" target="_blank">
-          <text x="50%" y="${30 + i * 15}%" text-anchor="middle" class="comment">
+          <text x="5%" y="${30 + i * 15}%" class="comment">
             ${post.title}
           </text> 
         </a>
@@ -12,7 +12,7 @@ export function velogSvg(id: String, posts: { title: string; link: string }[]){
       .join("");
 
     const svg = `
-      <svg width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+      <svg width="700" height="250" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#21985cff; stop-opacity:1" />
