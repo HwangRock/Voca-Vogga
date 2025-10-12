@@ -221,20 +221,3 @@ input[type="checkbox"] {
     transform: translateY(0);
   }
 }
-
-@font-face {
-  font-family: "NanumJinJu";
-  src: url("/font/NanumJinJuBagGyeongACe.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* 기본 바디 폰트(선택) */
-:root {
-  --ui-font: "NanumJinJu", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-}
-
-body {
-  font-family: var(--ui-font);
-}

@@ -8,7 +8,6 @@ export function velogSvg(
   const paddingLeft = 30;
   const paddingTop = 60;
 
-  // 이미지 순서 (public 경로)
   const postitImages = [
     "/postit.png",
     "/postit2.png",
@@ -17,17 +16,21 @@ export function velogSvg(
     "/postit2.png",
   ];
 
+  const base = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_URL)
+  ? String(process.env.NEXT_PUBLIC_BASE_URL).replace(/\/$/, "")
+  : "";
+
+  const fontPath = base ? `${base}/font/NanumJinJuBagGyeongACe.ttf` : "/font/NanumJinJuBagGyeongACe.ttf";
+
+
   const visiblePosts = posts.slice(0, 5);
 
-  // 카드 객체 생성: 개별 카드마다 텍스트 오프셋/스타일을 줄 수 있음
   const cards = visiblePosts.map((post, i) => {
     const x = paddingLeft + i * (cardWidth + gap);
     const y = paddingTop;
 
-    // 각 카드에 대해 필요하면 개별 조정값을 넣을 수 있음
-    // (예: 이미지별로 글자 자리수를 다르게 하고 싶다면 여기에서 조정)
     const perCardOverrides: Partial<{
-      textYOffset: number; // 포스트잇 내부 텍스트의 세로 오프셋 (px, 카드 상단 기준)
+      textYOffset: number;
       fontSize: number;
       lineClamp: number;
     }> = (() => {
@@ -44,17 +47,15 @@ export function velogSvg(
       link: post.link,
       date: formatPubDate(post.pubDate),
       textYOffset: perCardOverrides.textYOffset ?? 62,
-      fontSize: perCardOverrides.fontSize ?? 12,
+      fontSize: perCardOverrides.fontSize ?? 18,
       lineClamp: perCardOverrides.lineClamp ?? 5,
     };
   });
 
-  // 각 카드 객체를 이용해 SVG 요소 생성
   const itemsSvg = cards
     .map((card) => {
       const titleEsc = escapeXml(card.title);
       const linkEsc = escapeAttr(card.link);
-      // foreignObject 내부 HTML: 카드별 폰트 크기, 라인클램프 적용
       const html = `
         <div xmlns="http://www.w3.org/1999/xhtml" style="
           width: ${card.width}px;
@@ -72,7 +73,7 @@ export function velogSvg(
             overflow: hidden;
             text-overflow: ellipsis;
             font-family: 'NanumJinJu', sans-serif;
-            font-size: ${card.fontSize}px;
+            font-size: 19px;
             line-height: 1.1;
             color: #0b0b0b;
             text-decoration: none;
@@ -116,13 +117,20 @@ export function velogSvg(
       </defs>
 
       <style>
+        @font-face {
+        font-family: 'NanumJinJu';
+        src: url('${fontPath}') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        }
         .title {
           font-size: 25px;
-          fill: #0b0b0b;
-          font-family: "Trebuchet MS", sans-serif;
+          fill: #d1d0d0ff;
+          font-family: "Comic Sans MS", "Chalkboard SE", "Bradley Hand", "Segoe Print", cursive;
         }
         .detail {
-          font-size: 15px;
+          font-size: 12px;
           fill: #222;
           font-family: "Trebuchet MS", sans-serif;
         }
@@ -141,7 +149,6 @@ export function velogSvg(
   return svg;
 }
 
-/* 헬퍼들 */
 function formatPubDate(pubDate: string): string {
   try {
     const date = new Date(pubDate);
