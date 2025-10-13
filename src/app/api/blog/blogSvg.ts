@@ -1,6 +1,7 @@
 export function velogSvg(
   id: string,
-  posts: { title: string; link: string; pubDate: string }[]
+  posts: { title: string; link: string; pubDate: string }[],
+  opts?: { inlineImages?: string[]; inlineFontDataUri?: string }
 ) {
   const cardWidth = 140;
   const cardHeight = 180;
@@ -8,7 +9,7 @@ export function velogSvg(
   const paddingLeft = 30;
   const paddingTop = 60;
 
-  const postitImages = [
+  const defaultPostit = [
     "/postit.png",
     "/postit2.png",
     "/postit3.png",
@@ -16,12 +17,17 @@ export function velogSvg(
     "/postit2.png",
   ];
 
+  const postitImages = opts?.inlineImages ?? defaultPostit;
+
   const base = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_BASE_URL)
-  ? String(process.env.NEXT_PUBLIC_BASE_URL).replace(/\/$/, "")
-  : "";
+    ? String(process.env.NEXT_PUBLIC_BASE_URL).replace(/\/$/, "")
+    : "";
 
-  const fontPath = base ? `${base}/font/NanumJinJuBagGyeongACe.ttf` : "/font/NanumJinJuBagGyeongACe.ttf";
-
+  const fontPath = opts?.inlineFontDataUri
+    ? opts.inlineFontDataUri
+    : base
+      ? `${base}/font/NanumJinJuBagGyeongACe.ttf`
+      : "/font/NanumJinJuBagGyeongACe.ttf";
 
   const visiblePosts = posts.slice(0, 5);
 
@@ -29,13 +35,7 @@ export function velogSvg(
     const x = paddingLeft + i * (cardWidth + gap);
     const y = paddingTop;
 
-    const perCardOverrides: Partial<{
-      textYOffset: number;
-      fontSize: number;
-      lineClamp: number;
-    }> = (() => {
-      return { textYOffset: 68, fontSize: 16, lineClamp: 5 };
-    })();
+    const perCardOverrides = { textYOffset: 68, fontSize: 16, lineClamp: 5 };
 
     return {
       img: postitImages[i % postitImages.length],
@@ -61,7 +61,7 @@ export function velogSvg(
           width: ${card.width}px;
           height: ${card.height}px;
           display:flex;
-          align-items:flex-start; /* 세로 위치는 padding으로 조절 */
+          align-items:flex-start;
           justify-content:center;
           text-align:center;
           box-sizing:border-box;
@@ -77,7 +77,7 @@ export function velogSvg(
             line-height: 1.1;
             color: #0b0b0b;
             text-decoration: none;
-            padding: ${card.textYOffset - 12}px 10px 0px 10px; /* 위쪽 패딩으로 vertical 위치 제어 */
+            padding: ${card.textYOffset - 12}px 10px 0px 10px;
             box-sizing: border-box;
           ">
             ${titleEsc}
@@ -118,11 +118,11 @@ export function velogSvg(
 
       <style>
         @font-face {
-        font-family: 'NanumJinJu';
-        src: url('${fontPath}') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
+          font-family: 'NanumJinJu';
+          src: url('${fontPath}') format('truetype');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
         }
         .title {
           font-size: 25px;
