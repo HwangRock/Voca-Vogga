@@ -111,8 +111,8 @@ export function velogSvg(
     <svg width="${totalWidth}" height="320" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#21985cff; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#5feba5ff; stop-opacity:1" />
+          <stop offset="0%" style="stop-color:#24724cff; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2c8458ff; stop-opacity:1" />
         </linearGradient>
       </defs>
 
@@ -136,9 +136,27 @@ export function velogSvg(
         }
         a { text-decoration: none; }
       </style>
+      
+      <rect
+        x="0"
+        y="0"
+        width="${totalWidth}"
+        height="320"
+        fill="#8B5A2B"
+        rx="22"
+        ry="22"
+      />
+      <rect
+        x="8"
+        y="8"
+        width="${totalWidth - 16}"
+        height="${320 - 16}"
+        fill="url(#grad-green)"
+        rx="16"
+        ry="16"
+      />
 
-      <rect width="100%" height="100%" fill="url(#grad-green)" rx="20" ry="20"/>
-      <text x="50%" y="28" text-anchor="middle" class="title">
+      <text x="50%" y="40" text-anchor="middle" class="title">
         ${escapeXml(id)}'s Velog Posts
       </text>
 
