@@ -58,7 +58,6 @@ export async function GET(request: Request) {
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    const cacheControlValue = `public, max-age=${CACHE_TTL}, s-maxage=${CACHE_TTL}, stale-while-revalidate=${STALE_REVALIDATE}`;
 
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
