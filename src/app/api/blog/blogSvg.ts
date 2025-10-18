@@ -111,8 +111,8 @@ export function velogSvg(
     <svg width="${totalWidth}" height="320" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#24724cff; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#2c8458ff; stop-opacity:1" />
+          <stop offset="0%" style="stop-color:#0d482bff; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#18603cff; stop-opacity:1" />
         </linearGradient>
       </defs>
 
@@ -131,7 +131,7 @@ export function velogSvg(
         }
         .detail {
           font-size: 12px;
-          fill: #222;
+          fill: #fffdfdff;
           font-family: "Trebuchet MS", sans-serif;
         }
         a { text-decoration: none; }
@@ -143,8 +143,8 @@ export function velogSvg(
         width="${totalWidth}"
         height="320"
         fill="#8B5A2B"
-        rx="22"
-        ry="22"
+        rx="0"
+        ry="0"
       />
       <rect
         x="8"
@@ -152,8 +152,8 @@ export function velogSvg(
         width="${totalWidth - 16}"
         height="${320 - 16}"
         fill="url(#grad-green)"
-        rx="16"
-        ry="16"
+        rx="0"
+        ry="0"
       />
 
       <text x="50%" y="40" text-anchor="middle" class="title">
