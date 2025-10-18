@@ -7,7 +7,11 @@ import {
   POSTIT_2__BASE64,
   POSTIT_3__BASE64,
   NANUM_FONT_BASE64
-} from "@/lib/base64-assets"; // prebuild로 생성된 파일 경로
+} from "@/lib/base64-assets";
+import crypto from "crypto";
+
+const CACHE_TTL = 12 * 60 * 60;
+const STALE_REVALIDATE = 3 * 12 * 60 * 60;
 
 export async function GET(request: Request) {
   try {
@@ -32,12 +36,36 @@ export async function GET(request: Request) {
 
     const svg = velogSvg(id, slicedPosts, { inlineImages: imgs, inlineFontDataUri: NANUM_FONT_BASE64 });
 
-    return new Response(svg, { headers: { "Content-Type": "image/svg+xml; charset=utf-8" } });
+    const etag=crypto.createHash("sha1").update(svg).digest("hex");
+    const ifNoneMatch = request.headers.get("if-none-match");
+    const cacheControlValue = `public, max-age=${CACHE_TTL}, s-maxage=${CACHE_TTL}, stale-while-revalidate=${STALE_REVALIDATE}`;
+
+    if (ifNoneMatch === etag) {
+      return new Response(null, {
+        status: 304,
+        headers: {
+          "Cache-Control": cacheControlValue,
+          "ETag": etag
+        }
+      });
+    }
+    return new Response(svg, {
+      headers: {
+        "Content-Type": "image/svg+xml; charset=utf-8",
+        "Cache-Control": cacheControlValue,
+        "ETag": etag
+      }
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
+    const cacheControlValue = `public, max-age=${CACHE_TTL}, s-maxage=${CACHE_TTL}, stale-while-revalidate=${STALE_REVALIDATE}`;
+
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": cacheControlValue
+      },
     });
   }
 }
