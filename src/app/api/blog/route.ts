@@ -64,7 +64,6 @@ export async function GET(request: Request) {
       status: 500,
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": cacheControlValue
       },
     });
   }
