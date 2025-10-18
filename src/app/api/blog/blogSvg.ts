@@ -143,8 +143,8 @@ export function velogSvg(
         width="${totalWidth}"
         height="320"
         fill="#8B5A2B"
-        rx="5"
-        ry="5"
+        rx="0"
+        ry="0"
       />
       <rect
         x="8"
@@ -152,8 +152,8 @@ export function velogSvg(
         width="${totalWidth - 16}"
         height="${320 - 16}"
         fill="url(#grad-green)"
-        rx="16"
-        ry="16"
+        rx="0"
+        ry="0"
       />
 
       <text x="50%" y="40" text-anchor="middle" class="title">
