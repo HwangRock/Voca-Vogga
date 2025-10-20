@@ -47,7 +47,7 @@ export async function GET(request: Request) {
           "ETag": etag
         }
       });
-    }
+    } 
     return new Response(svg, {
       headers: {
         "Content-Type": "image/svg+xml; charset=utf-8",
