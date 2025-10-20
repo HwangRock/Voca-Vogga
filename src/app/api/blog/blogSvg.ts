@@ -7,7 +7,7 @@ export function velogSvg(
   const cardHeight = 180;
   const gap = 18;
   const paddingLeft = 30;
-  const paddingTop = 60;
+  const paddingTop = 45;
 
   const defaultPostit = [
     "/postit.png",
@@ -104,6 +104,60 @@ export function velogSvg(
     })
     .join("");
 
+  const chalkSvg = `
+  <rect
+    x="550"
+    y="305"
+    width="75"
+    height="7"
+    rx="7"
+    ry="7"
+    fill="#ee44a4ff"
+  />
+`;
+  const chalkSvg2 = `
+  <rect
+    x="443"
+    y="305"
+    width="75"
+    height="7"
+    rx="7"
+    ry="7"
+    fill="#d1d0d0ff"
+  />
+`;
+
+  const eraser=`
+  <rect
+    x="300"
+    y="263"
+    width="100"
+    height="50"
+    rx="5"
+    ry="5"
+    fill="#63cfadff"
+  />
+`;
+
+  const memo=`
+  <text 
+   x="710"
+    y="260"
+    text-anchor="middle"
+    font-size="15"
+    font-family="NanumJinJu,sans-serif"
+    fill="#ee44a4"
+    fill-opacity="1"
+    transform="rotate(-4 710 260)"
+  >
+    <tspan x="710" dy="0">떠든 사람</tspan>
+    <tspan x="710" dy="15">멋있는 ${escapeXml(id)}</tspan>
+    <tspan x="710" dy="15">잘 꾸미는 다혀니</tspan>
+    <tspan x="710" dy="15">잘 만드는 황록</tspan>
+   </text>
+`;
+
+
   const totalWidth =
     paddingLeft * 2 + cards.length * cardWidth + (cards.length - 1) * gap;
 
@@ -155,6 +209,14 @@ export function velogSvg(
         rx="0"
         ry="0"
       />
+
+      ${chalkSvg}
+
+      ${chalkSvg2}
+
+      ${eraser}
+
+      ${memo}
 
       <text x="50%" y="40" text-anchor="middle" class="title">
         ${escapeXml(id)}'s Velog Posts
