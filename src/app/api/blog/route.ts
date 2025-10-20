@@ -11,7 +11,6 @@ import {
 import crypto from "crypto";
 
 const CACHE_TTL = 12 * 60 * 60;
-const STALE_REVALIDATE = 3 * 12 * 60 * 60;
 
 export async function GET(request: Request) {
   try {
@@ -38,7 +37,7 @@ export async function GET(request: Request) {
 
     const etag=crypto.createHash("sha1").update(svg).digest("hex");
     const ifNoneMatch = request.headers.get("if-none-match");
-    const cacheControlValue = `public, max-age=${CACHE_TTL}, s-maxage=0, stale-while-revalidate=${STALE_REVALIDATE}`;
+    const cacheControlValue = `public, max-age=${CACHE_TTL}`;
 
     if (ifNoneMatch === etag) {
       return new Response(null, {

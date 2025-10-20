@@ -135,7 +135,14 @@ export function velogSvg(
     height="50"
     rx="5"
     ry="5"
-    fill="#63cfadff"
+    fill="#f6a207ff"
+  />
+  <rect
+    x="${300+50-5}"
+    y="263"
+    width="10"
+    height="50"
+    fill="black"
   />
 `;
 
