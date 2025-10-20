@@ -42,7 +42,7 @@ export async function GET(request: Request) {
     if (ifNoneMatch === etag) {
       return new Response(null, {
         status: 304,
-        headers: {  
+        headers: {
           "Cache-Control": cacheControlValue,
           "ETag": etag
         }
