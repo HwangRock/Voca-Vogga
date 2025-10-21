@@ -37,7 +37,7 @@ export async function GET(request: Request) {
 
     const etag=crypto.createHash("sha1").update(svg).digest("hex");
     const ifNoneMatch = request.headers.get("if-none-match");
-    const cacheControlValue = `public, max-age=${CACHE_TTL}`;
+    const cacheControlValue = `public, max-age=${CACHE_TTL}, s-maxage=0, must-revalidate`;
 
     if (ifNoneMatch === etag) {
       return new Response(null, {
