@@ -1,6 +1,25 @@
-## 보카볶아
+## 보카볶아 + velog bedge
 
-notion에서 영단어를 불러오는 영단어 테스트 프로젝트입니다.
+웹에서는 notion에서 영단어를 불러오는 영단어 테스트를 제공하고  
+API로 velog 뱃지를 불러올 수 있습니다.
+
+---
+
+### velog bedge API
+
+velog ID를 넣음으로 사용할 수 있습니다.
+
+#### version 1
+```powershell
+[![velog posting](https://notion-serverless-voca.vercel.app/api/velog?id=벨로그 ID)](https://velog.io/@벨로그 ID)
+```
+[![velog posting](https://notion-serverless-voca.vercel.app/api/velog?id=hwangrock1220)](https://velog.io/@hwangrock1220)
+
+#### version 2
+```powershell
+[![velog posting](https://notion-serverless-voca.vercel.app/api/velogv2?id=벨로그 ID)](https://velog.io/@벨로그 ID)
+```
+[![velog posting](https://notion-serverless-voca.vercel.app/api/velogv2?id=hwangrock1220)](https://velog.io/@hwangrock1220)
 
 ---
 
