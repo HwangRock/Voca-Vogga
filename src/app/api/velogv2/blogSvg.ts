@@ -127,6 +127,18 @@ export function velogSvg(
   />
 `;
 
+const chalkSvg3 = `
+  <rect
+    x="200"
+    y="305"
+    width="75"
+    height="7"
+    rx="7"
+    ry="7"
+    fill="#13a1e7ff"
+  />
+`;
+
   const eraser=`
   <rect
     x="300"
@@ -146,21 +158,51 @@ export function velogSvg(
   />
 `;
 
-  const memo=`
+  const memo2=`
+  <text 
+   x="110"
+    y="280"
+    text-anchor="middle"
+    font-size="25"
+    font-family="NanumJinJu,sans-serif"
+    fill="#13a1e7ff"
+    fill-opacity="1"
+    transform="rotate(5 110 260)"
+  >
+    모두 화이팅 ~~ S2
+   </text>
+`;
+
+const memo3=`
+  <text 
+   x="790"
+    y="30"
+    text-anchor="middle"
+    font-size="30"
+    font-family="NanumJinJu,sans-serif"
+    fill="#d1d0d0ff"
+    fill-opacity="1"
+  >
+    <tspan x="790" dy="0">주번</tspan>
+    <tspan x="790" dy="25">다혀니</tspan>
+   </text>
+`;
+
+const memo=`
   <text 
    x="710"
     y="260"
     text-anchor="middle"
-    font-size="15"
+    font-size="13"
     font-family="NanumJinJu,sans-serif"
     fill="#ee44a4"
     fill-opacity="1"
     transform="rotate(-4 710 260)"
   >
     <tspan x="710" dy="0">떠든 사람</tspan>
-    <tspan x="710" dy="15">멋있는 ${escapeXml(id)}</tspan>
-    <tspan x="710" dy="15">잘 꾸미는 다혀니</tspan>
-    <tspan x="710" dy="15">잘 만드는 황록</tspan>
+    <tspan x="710" dy="12">멋있는 ${escapeXml(id)}</tspan>
+    <tspan x="710" dy="12">잘 꾸미는 햇감자</tspan>
+    <tspan x="710" dy="12">잘 만드는 황록</tspan>
    </text>
 `;
 
@@ -192,7 +234,7 @@ export function velogSvg(
         }
         .detail {
           font-size: 12px;
-          fill: #fffdfdff;
+          fill: #d1d0d0ff;
           font-family: "Trebuchet MS", sans-serif;
         }
         a { text-decoration: none; }
@@ -221,9 +263,15 @@ export function velogSvg(
 
       ${chalkSvg2}
 
+      ${chalkSvg3}
+
       ${eraser}
 
       ${memo}
+
+      ${memo2}
+
+      ${memo3}
 
       <text x="50%" y="40" text-anchor="middle" class="title">
         ${escapeXml(id)}'s Velog Posts
