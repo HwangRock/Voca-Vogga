@@ -208,16 +208,16 @@ const chalkSvg3 = `
 
 const memo3=`
   <text 
-   x="770"
+   x="785"
     y="30"
     text-anchor="middle"
-    font-size="30"
+    font-size="24"
     font-family="NanumJinJu,sans-serif"
     fill="#d1d0d0ff"
     fill-opacity="1"
   >
-    <tspan x="770" dy="0">${FIXED_PHRASES.memo3Line1}</tspan>
-    <tspan x="770" dy="25">${FIXED_PHRASES.memo3Line2}</tspan>
+    <tspan x="785" dy="0">${FIXED_PHRASES.memo3Line1}</tspan>
+    <tspan x="785" dy="20">${FIXED_PHRASES.memo3Line2}</tspan>
    </text>
 `;
 
