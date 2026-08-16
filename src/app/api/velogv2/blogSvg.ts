@@ -1,3 +1,28 @@
+import { FIXED_PHRASES, memoLine2, titleText } from "./textContent";
+
+export function collectRenderedText(
+  id: string,
+  posts: { title: string; pubDate: string }[]
+): string {
+  const visiblePosts = posts.slice(0, 5);
+  const fixed = Object.values(FIXED_PHRASES).join("");
+  const dynamic = [
+    memoLine2(id),
+    titleText(id),
+    ...visiblePosts.map((p) => p.title),
+    ...visiblePosts.map((p) => formatPubDate(p.pubDate)),
+  ].join("");
+  return fixed + dynamic;
+}
+
+function fontFormatFor(pathOrDataUri: string): "woff2" | "truetype" {
+  if (pathOrDataUri.startsWith("data:")) {
+    const mime = /^data:([^;]+);base64,/.exec(pathOrDataUri)?.[1] ?? "";
+    return mime === "font/woff2" ? "woff2" : "truetype";
+  }
+  return pathOrDataUri.endsWith(".woff2") ? "woff2" : "truetype";
+}
+
 export function velogSvg(
   id: string,
   posts: { title: string; link: string; pubDate: string }[],
@@ -28,6 +53,7 @@ export function velogSvg(
     : base
       ? `${base}/font/NanumJinJuBagGyeongACe.ttf`
       : "/font/NanumJinJuBagGyeongACe.ttf";
+  const fontFormat = fontFormatFor(fontPath);
 
   const visiblePosts = posts.slice(0, 5);
 
@@ -51,6 +77,20 @@ export function velogSvg(
       lineClamp: perCardOverrides.lineClamp ?? 5,
     };
   });
+
+  const uniqueImageIds = new Map<string, string>();
+  let imgCounter = 0;
+  for (const card of cards) {
+    if (!uniqueImageIds.has(card.img)) {
+      uniqueImageIds.set(card.img, `postit-img-${imgCounter++}`);
+    }
+  }
+  const imageDefsSvg = Array.from(uniqueImageIds.entries())
+    .map(
+      ([src, defId]) =>
+        `<image id="${defId}" href="${src}" width="${cardWidth}" height="${cardHeight}" preserveAspectRatio="xMidYMid slice" />`
+    )
+    .join("");
 
   const itemsSvg = cards
     .map((card) => {
@@ -86,14 +126,7 @@ export function velogSvg(
       `;
 
       return `
-        <image
-          href="${card.img}"
-          x="${card.x}"
-          y="${card.y}"
-          width="${card.width}"
-          height="${card.height}"
-          preserveAspectRatio="xMidYMid slice"
-        />
+        <use href="#${uniqueImageIds.get(card.img)}" x="${card.x}" y="${card.y}" />
         <foreignObject x="${card.x}" y="${card.y}" width="${card.width}" height="${card.height}">
           ${html}
         </foreignObject>
@@ -169,22 +202,22 @@ const chalkSvg3 = `
     fill-opacity="1"
     transform="rotate(5 110 260)"
   >
-    모두 화이팅 ~~ S2
+    ${FIXED_PHRASES.memo2}
    </text>
 `;
 
 const memo3=`
   <text 
-   x="790"
+   x="785"
     y="30"
     text-anchor="middle"
-    font-size="30"
+    font-size="24"
     font-family="NanumJinJu,sans-serif"
     fill="#d1d0d0ff"
     fill-opacity="1"
   >
-    <tspan x="790" dy="0">주번</tspan>
-    <tspan x="790" dy="25">다혀니</tspan>
+    <tspan x="785" dy="0">${FIXED_PHRASES.memo3Line1}</tspan>
+    <tspan x="785" dy="20">${FIXED_PHRASES.memo3Line2}</tspan>
    </text>
 `;
 
@@ -199,10 +232,10 @@ const memo=`
     fill-opacity="1"
     transform="rotate(-4 710 260)"
   >
-    <tspan x="710" dy="0">떠든 사람</tspan>
-    <tspan x="710" dy="12">멋있는 ${escapeXml(id)}</tspan>
-    <tspan x="710" dy="12">잘 꾸미는 햇감자</tspan>
-    <tspan x="710" dy="12">잘 만드는 황록</tspan>
+    <tspan x="710" dy="0">${FIXED_PHRASES.memoLine1}</tspan>
+    <tspan x="710" dy="12">${escapeXml(memoLine2(id))}</tspan>
+    <tspan x="710" dy="12">${FIXED_PHRASES.memoLine3}</tspan>
+    <tspan x="710" dy="12">${FIXED_PHRASES.memoLine4}</tspan>
    </text>
 `;
 
@@ -217,12 +250,13 @@ const memo=`
           <stop offset="0%" style="stop-color:#0d482bff; stop-opacity:1" />
           <stop offset="100%" style="stop-color:#18603cff; stop-opacity:1" />
         </linearGradient>
+        ${imageDefsSvg}
       </defs>
 
       <style>
         @font-face {
           font-family: 'NanumJinJu';
-          src: url('${fontPath}') format('truetype');
+          src: url('${fontPath}') format('${fontFormat}');
           font-weight: 400;
           font-style: normal;
           font-display: swap;
@@ -274,7 +308,7 @@ const memo=`
       ${memo3}
 
       <text x="50%" y="40" text-anchor="middle" class="title">
-        ${escapeXml(id)}'s Velog Posts
+        ${escapeXml(titleText(id))}
       </text>
 
       ${itemsSvg}
@@ -284,7 +318,7 @@ const memo=`
   return svg;
 }
 
-function formatPubDate(pubDate: string): string {
+export function formatPubDate(pubDate: string): string {
   try {
     const date = new Date(pubDate);
     if (isNaN(date.getTime())) return pubDate;

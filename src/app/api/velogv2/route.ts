@@ -1,13 +1,14 @@
 export const runtime = "nodejs";
 
 import { parseStringPromise } from "xml2js";
-import { velogSvg } from "./blogSvg";
+import { velogSvg, collectRenderedText } from "./blogSvg";
 import {
   POSTIT_1__BASE64,
   POSTIT_2__BASE64,
   POSTIT_3__BASE64,
   NANUM_FONT_BASE64
 } from "@/lib/base64-assets";
+import { getSubsettedFontDataUri } from "@/lib/font-subset";
 import crypto from "crypto";
 
 const CACHE_TTL = 12 * 60 * 60;
@@ -33,7 +34,11 @@ export async function GET(request: Request) {
       POSTIT_2__BASE64,
     ];
 
-    const svg = velogSvg(id, slicedPosts, { inlineImages: imgs, inlineFontDataUri: NANUM_FONT_BASE64 });
+    const charset = collectRenderedText(id, slicedPosts);
+    const subsetFontUri = await getSubsettedFontDataUri(id, charset);
+    const fontDataUri = subsetFontUri ?? NANUM_FONT_BASE64;
+
+    const svg = velogSvg(id, slicedPosts, { inlineImages: imgs, inlineFontDataUri: fontDataUri });
 
     const etag=crypto.createHash("sha1").update(svg).digest("hex");
     const ifNoneMatch = request.headers.get("if-none-match");
